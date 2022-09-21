@@ -1,0 +1,7 @@
+{
+    "people":[
+        {
+            "id": 1, "name": "王大锤", "sex": "男","birthday":"1990-01-01","father_id":3,"monther_id":4,"partner_id":null
+        }
+    ]
+}
