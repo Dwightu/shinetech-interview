@@ -2,6 +2,9 @@
     "people":[
         {
             "id": 1, "name": "王大锤", "sex": "男","birthday":"1990-01-01","father_id":3,"monther_id":4,"partner_id":null
+        },
+        {
+            "id": 2, "name": "王尼美", "sex": "女","birthday":"1990-02-01","father_id":3,"monther_id":4,"partner_id":null
         }
     ]
 }

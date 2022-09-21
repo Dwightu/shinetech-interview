@@ -17,9 +17,15 @@ export const DataProvider = ({ children }) => {
         setPeople(data)
     }
 
+    const deletePeople=async(id)=>{
+        if (window.confirm(`Are you sure you want to delete the name called ${id} ?`)) {
+            setPeople(people.filter((item) => item.id !== id))
+        }
+    }
+
 
     return <DataContext.Provider value={{
-        people
+        people,deletePeople
     }}>{children}</DataContext.Provider>
 }
 

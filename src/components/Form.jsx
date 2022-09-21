@@ -8,7 +8,7 @@ function Form() {
   return (
     <div className='Form'>
       {
-        people.map(item=>(<Formlist/>))
+        people.map(item=>(<Formlist key={item.id} item={item}/>))
       }
     </div>
   )
