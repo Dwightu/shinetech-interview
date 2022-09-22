@@ -1,10 +1,67 @@
 {
-    "people":[
-        {
-            "id": 1, "name": "王大锤", "sex": "男","birthday":"1990-01-01","father_id":3,"monther_id":4,"partner_id":null
-        },
-        {
-            "id": 2, "name": "王尼美", "sex": "女","birthday":"1990-02-01","father_id":3,"monther_id":4,"partner_id":null
-        }
-    ]
+  "people": [
+    {
+      "id": 1,
+      "name": "王大锤",
+      "sex": "男",
+      "birthday": "1990-01-01",
+      "father_id": 3,
+      "monther_id": 4,
+      "partner_id": null
+    },
+    {
+      "id": 2,
+      "name": "王尼美",
+      "sex": "女",
+      "birthday": "1990-02-01",
+      "father_id": 3,
+      "monther_id": 4,
+      "partner_id": null
+    },
+    {
+      "id": 3,
+      "name": "王建国",
+      "sex": "男",
+      "birthday": "1970-03-03",
+      "father_id": null,
+      "monther_id": 4,
+      "partner_id": 4
+    },
+    {
+      "id": 4,
+      "name": "李秀英",
+      "sex": "女",
+      "birthday": "1970-03-03",
+      "father_id": null,
+      "monther_id": null,
+      "partner_id": 3
+    },
+    {
+      "id": 5,
+      "name": "赵铁柱",
+      "sex": "男",
+      "birthday": "2010-04-04",
+      "father_id": null,
+      "monther_id": null,
+      "partner_id": null
+    },
+    {
+      "id": 6,
+      "name": "王小明",
+      "sex": "男",
+      "birthday": "2010-05-05",
+      "father_id": 1,
+      "monther_id": 2,
+      "partner_id": null
+    },
+    {
+      "name": "刘翔",
+      "sex": "男",
+      "birthday": "1990-02-03",
+      "monther_id": 1,
+      "father_id": 2,
+      "partner_id": 4,
+      "id": 7
+    }
+  ]
 }
