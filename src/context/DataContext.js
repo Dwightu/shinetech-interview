@@ -8,9 +8,12 @@ export const DataProvider = ({ children }) => {
 
     const [people, setPeople] = useState([])
 
-    //Fetch People using Mock Backend: https://www.npmjs.com/package/json-server
+    // ------------------------------------------------------------------
+    // API 请求，增删改查操作
+    // ------------------------------------------------------------------
+    // Using Mock Backend: https://www.npmjs.com/package/json-server
     const fetchPeople = async () => {
-        const response = await axios({method:'get',url:`http://localhost:3000/people`})
+        const response = await axios({ method: 'get', url: `http://localhost:3000/people` })
         const data = await response.data;
         setPeople(data)
     }
@@ -18,44 +21,46 @@ export const DataProvider = ({ children }) => {
     const updatePeople = (id, payload) => {
         axios({
             method: 'put',
-            url:`http://localhost:3000/people/${id}`,
-            data:payload
-        }).then(()=>{
+            url: `http://localhost:3000/people/${id}`,
+            data: payload
+        }).then(() => {
             alert('successful')
             fetchPeople();
+        }).catch(()=>{
+            alert('找不到该id,请检查！！')
         });
     }
 
-    const deletePeople=async(id,name)=>{
+    const deletePeople = async (id, name) => {
         if (window.confirm(`Are you sure you want to delete the name called ${name} ?`)) {
             axios({
                 method: 'delete',
-                url:`http://localhost:3000/people/${id}`,
-            }).then(()=>{
+                url: `http://localhost:3000/people/${id}`,
+            }).then(() => {
                 alert('successful')
                 fetchPeople()
             });
         }
     }
 
-    const addPeople=(payload)=>{
+    const addPeople = (payload) => {
         // Send a POST request
         axios({
             method: 'post',
-            url:`http://localhost:3000/people`,
+            url: `http://localhost:3000/people`,
             data: payload
-        }).then(()=>{
+        }).then(() => {
             alert('successful')
             fetchPeople()
         });
     }
 
 
-    const findById=(id)=>{
-        return people.find(person => person.id === id) || {name:"未填写"};
+    const findById = (id) => {
+        return people.find(person => person.id === id) || { name: "未填写" };
     }
 
-   
+
 
     useEffect(() => {
         fetchPeople()
@@ -65,13 +70,13 @@ export const DataProvider = ({ children }) => {
     // --------------------------------------------------------------------------
     // 以下为寻找关系代码实现
 
-    const findRelation=(obj)=>{
-        const {id1,id2}=obj;
+    const findRelation = (obj) => {
+        const { id1, id2 } = obj;
         const visited1 = {};
         let ancestorId = null;
         const queue1 = [id1];
-        const queue1Relation = {[id1]: "self"}
-        
+        const queue1Relation = { [id1]: "self" }
+
         //广度遍历 以id1为root
         //  visited1: {1: 'self', 3: 'self/father(m)', 4: 'self/mother(m)'}
         // quequeue1Relation: {1: 'self', 3: 'self/father(m)', 4: 'self/mother(m)'}
@@ -101,9 +106,9 @@ export const DataProvider = ({ children }) => {
 
         //第二次广度遍历
         const queue2 = [id2];
-        const queue2Relation = {[id2]: "self"}
+        const queue2Relation = { [id2]: "self" }
         const visited2 = {};
-        
+
         while (queue2.length) {
             const currentId = queue2.shift();
             // 只要发现一个相同的 有关系的人，记录并停止循环
@@ -132,64 +137,64 @@ export const DataProvider = ({ children }) => {
             visited2[currentId] = currentRelation;
         }
         const relation = getRelation(queue1Relation[ancestorId], queue2Relation[ancestorId]);
-        const res = optimize(relation, id1,id2);
+        const res = optimize(relation, id1, id2);
         return res;
     }
 
-const getRelation = (relation1, relation2) => {
-    relation2 = getReverseRelation(relation2);
-    return relation1 + "/" + relation2;
-}
-
-const getReverseRelation = (relation) => {
-    const relationReverse = relation.split("/").reverse();
-    return relationReverse.map(item => {
-        if (item === "mother(w)") {
-            return "daughter";
-        } else if (item === "mother(m)") {
-            return "son";
-        } else if (item === "father(w)") {
-            return "daughter";
-        } else if (item === "father(m)") {
-            return "son";
-        } else if (item === "self") {
-            return "self";
-        } else if (item === "partner(w)") {
-            return "husband";
-        } else if (item === "partner(m)") {
-            return "wife";
-        }
-    }).join("/");
-}
-
-
-// 找出年龄差距，改变叫法
-const optimize = (relation, id1,id2) => {
-    const a = findById(id1);
-    const b = findById(id2);
-    // 叫表哥还是表弟？
-    const bIsBiggerThanA = a.birthday > b.birthday;
-    relation = relation.replace(/\(m\)/g, "").replace(/\(w\)/g, "");
-
-
-    const arr = relation.split("/");
-    let jiaoshenme = "self";
-    for (let i = 0; i < arr.length; i++) {
-        jiaoshenme = getOneRelation(jiaoshenme, arr[i])
+    const getRelation = (relation1, relation2) => {
+        relation2 = getReverseRelation(relation2);
+        return relation1 + "/" + relation2;
     }
-    relation = jiaoshenme.replace(/self/g, "");
 
-    relation = relation.replace(/哥/, bIsBiggerThanA ? "哥" : "弟");
-    relation = relation.replace(/姐/, bIsBiggerThanA ? "姐" : "妹");
-    return relation;
-}
+    const getReverseRelation = (relation) => {
+        const relationReverse = relation.split("/").reverse();
+        return relationReverse.map(item => {
+            if (item === "mother(w)") {
+                return "daughter";
+            } else if (item === "mother(m)") {
+                return "son";
+            } else if (item === "father(w)") {
+                return "daughter";
+            } else if (item === "father(m)") {
+                return "son";
+            } else if (item === "self") {
+                return "self";
+            } else if (item === "partner(w)") {
+                return "husband";
+            } else if (item === "partner(m)") {
+                return "wife";
+            }
+        }).join("/");
+    }
+
+
+    // 找出年龄差距，改变叫法
+    const optimize = (relation, id1, id2) => {
+        const a = findById(id1);
+        const b = findById(id2);
+        // 叫表哥还是表弟？
+        const bIsBiggerThanA = a.birthday > b.birthday;
+        relation = relation.replace(/\(m\)/g, "").replace(/\(w\)/g, "");
+
+
+        const arr = relation.split("/");
+        let jiaoshenme = "self";
+        for (let i = 0; i < arr.length; i++) {
+            jiaoshenme = getOneRelation(jiaoshenme, arr[i])
+        }
+        relation = jiaoshenme.replace(/self/g, "");
+
+        relation = relation.replace(/哥/, bIsBiggerThanA ? "哥" : "弟");
+        relation = relation.replace(/姐/, bIsBiggerThanA ? "姐" : "妹");
+        return relation;
+    }
 
 
 
-    
+
 
     return <DataContext.Provider value={{
-        people,deletePeople,findById,addPeople,updatePeople,findRelation
+        people, deletePeople, findById, addPeople, updatePeople, findRelation
     }}>{children}</DataContext.Provider>
 }
 

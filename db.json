@@ -53,15 +53,6 @@
       "father_id": 1,
       "monther_id": null,
       "partner_id": null
-    },
-    {
-      "name": "刘翔",
-      "sex": "男",
-      "birthday": "1990-02-03",
-      "monther_id": 1,
-      "father_id": 2,
-      "partner_id": 4,
-      "id": 7
     }
   ]
 }

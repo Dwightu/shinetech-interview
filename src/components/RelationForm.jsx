@@ -5,7 +5,6 @@ import { useContext } from 'react';
 
 function RelationForm(props) {
     const [inputs, setInputs] = useState({});
-    const [relation,setRelation]=useState();
     const {findById,findRelation}=useContext(DataContext);
 
 
