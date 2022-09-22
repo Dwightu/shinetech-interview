@@ -1,4 +1,5 @@
 // 3层关系列举图谱
+// 使用Copilot自动生成，改了一些中文
 export const getOneRelation = (acc, cur) => {
     if (acc === "self") {
         return cur;
@@ -150,5 +151,10 @@ export const getOneRelation = (acc, cur) => {
         } else if (cur === "daughter") {
             return "表姐";
         }
+    } else if (acc === "阿姨") {
+        if (cur === "son") {
+            return "表姐"
+        }
     }
+
 }
