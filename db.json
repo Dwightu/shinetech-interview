@@ -24,7 +24,7 @@
       "sex": "男",
       "birthday": "1970-03-03",
       "father_id": null,
-      "monther_id": 4,
+      "monther_id": null,
       "partner_id": 4
     },
     {
@@ -42,7 +42,7 @@
       "sex": "男",
       "birthday": "2010-04-04",
       "father_id": null,
-      "monther_id": null,
+      "monther_id": 2,
       "partner_id": null
     },
     {
@@ -51,7 +51,7 @@
       "sex": "男",
       "birthday": "2010-05-05",
       "father_id": 1,
-      "monther_id": 2,
+      "monther_id": null,
       "partner_id": null
     },
     {

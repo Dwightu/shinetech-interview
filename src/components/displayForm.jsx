@@ -21,7 +21,7 @@ export default function MyForm(props) {
     inputs.monther_id=Number(inputs.monther_id)
     inputs.partner_id=Number(inputs.partner_id)
     if(props.showId){
-      updatePeople(inputs);
+      updatePeople(inputs.id,inputs);
     }else{
       addPeople(inputs);
     }
@@ -33,7 +33,9 @@ export default function MyForm(props) {
         <br />
         {props.showId ? "请输入想更改的成员信息":"请输入想添加的成员信息"}    
         <form onSubmit={handleSubmit}>
-            {props.showId ? <label>ID:
+            {props.showId ? <label>                    
+              <br />
+                    ID:
                     <input 
                         type="text" 
                         name="id" 
@@ -41,6 +43,7 @@ export default function MyForm(props) {
                         onChange={handleChange}
                     />
             </label> : null}
+            
             <br />
             <label>姓名:
                 <input 
